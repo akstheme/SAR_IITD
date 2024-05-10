@@ -1,3 +1,5 @@
+#-----------------------------------------------------------------------------------------------------------------
+#import the necessory libraries
 from ultralytics import YOLO
 import os
 from ultralytics import settings
@@ -5,25 +7,30 @@ import cv2
 import numpy as np
 from tensorflow.keras.models import load_model
 from collections import Counter
+
+#---------------------------------------------------------------------------------------------------------------
+# If required change the directory for save the results
 #settings.reset()
 # Update a setting
 #settings.update({'runs_dir': 'E:/IITD_ResearchWork/B_Reporter/detective/code/My_projects/'})
-
+#---------------------------------------------------------------------------------------------------------------
 # Get user input for the subject
 user_input = input("Enter the subject: ")
-
+#---------------------------------------------------------------------------------------------------------------
 # Update the output directories based on user input
 Person_Dir = f"{user_input}/Person"
 Face_Dir = f"{user_input}/Face"
 Fire_Dir = f"{user_input}/Fire"
 Weapon_Dir = f"{user_input}/Weapon"
-
+#--------------------------------------------------------------------------------------------------------------
+# Calling the re-trained models 
 model_P = YOLO("E:/IITD_ResearchWork/B_Reporter/detective/code/My_projects/models/person.pt")
 model_FC = YOLO("E:/IITD_ResearchWork/B_Reporter/detective/code/My_projects/models/human_face.pt")
 model_FR = YOLO("E:/IITD_ResearchWork/B_Reporter/detective/code/My_projects/models/fire.pt")
 model_W = YOLO("E:/IITD_ResearchWork/B_Reporter/detective/code/My_projects/models/weapon.pt")
 model_FER = load_model("E:/IITD_ResearchWork/B_Reporter/detective/code/My_projects/fer_model_best.h5")
-
+#---------------------------------------------------------------------------------------------------------------
+# testing on an custom image
 source = "E:/IITD_ResearchWork/B_Reporter/detective/code/My_projects/Test/h.jpg"
 
 #model.predict(source, save=True, save_crop=True, classes=None, conf=0.5)
